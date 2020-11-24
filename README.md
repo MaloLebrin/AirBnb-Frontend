@@ -4,7 +4,7 @@ React native training project produced at [Reacteur](https://www.lereacteur.io/)
 
 ## Screenshots 
 
-![login]() ![Signup]()
+![login](https://github.com/MaloLebrin/AirBnb-Frontend/blob/main/screenshots/login.png) ![Signup](https://github.com/MaloLebrin/AirBnb-Frontend/blob/main/screenshots/signup.png)
 
 ## Install & Usage 
 
