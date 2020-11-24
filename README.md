@@ -31,3 +31,8 @@ Run the project :
 ```
 expo start
 ```
+## Packages used
+* [React Native async storage](https://reactnative.dev/docs/asyncstorage)
+* [React Navogation](https://reactnavigation.org/)
+* [Axios](https://www.axios.com/)
+* [Expo](https://docs.expo.io/)
