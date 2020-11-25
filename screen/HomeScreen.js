@@ -4,9 +4,7 @@ import { View, ActivityIndicator, TouchableOpacity, SafeAreaView, } from "react-
 
 import axios from "axios";
 import Card from "../components/Card";
-import {
-    FlatList,
-} from "react-native-gesture-handler";
+import { FlatList } from "react-native-gesture-handler";
 
 const HomeScreen = () => {
     const [data, setData] = useState()

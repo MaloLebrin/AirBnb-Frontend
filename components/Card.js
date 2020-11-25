@@ -1,15 +1,15 @@
 import React from "react";
 import { View, Text, ImageBackground, Image, StyleSheet } from "react-native";
 import Carousel from "react-native-snap-carousel";
-
-// import Stars from "./Stars";
+import Ratings from "./Ratings";
 
 const Card = ({ data }) => {
+
     _renderItem = ({ item, index }) => {
         return <Image style={styles.img} source={{ uri: item.url }} />;
     };
     // console.log(data);
-    return (
+    return data ? (
         <View style={styles.container}>
             <Carousel
                 data={data.photos}
@@ -22,7 +22,8 @@ const Card = ({ data }) => {
                 <View>
                     <Text style={styles.title}>{data.title}</Text>
                     <View style={styles.rating}>
-                        <Text>étoiles {data.ratingValue}</Text>
+                        {/* <Text>étoiles {data.ratingValue}</Text> */}
+                        <Ratings rating={data.ratingValue} />
                         <Text style={styles.reviews}>{data.reviews} reviews</Text>
                         <Text style={styles.price}> {data.price} € </Text>
                     </View>
@@ -33,7 +34,10 @@ const Card = ({ data }) => {
                 />
             </View>
         </View>
-    )
+    ) : (<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator />
+    </View>
+        )
 }
 const styles = StyleSheet.create({
     container: {
@@ -70,7 +74,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     reviews: {
-        fontSize: 18,
+        fontSize: 14,
         color: "#BBBBBB",
         marginLeft: 10
     }
