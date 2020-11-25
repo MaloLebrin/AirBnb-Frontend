@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/core";
-import { Text, View, ActivityIndicator, Button } from "react-native";
+import { View, ActivityIndicator, TouchableOpacity, } from "react-native";
 
 import axios from "axios";
 import Card from "../components/Card";
 import {
     FlatList,
-    TouchableWithoutFeedback
+    // TouchableWithoutFeedback
 } from "react-native-gesture-handler";
 
 const HomeScreen = () => {
@@ -34,9 +34,11 @@ const HomeScreen = () => {
         ) : (
             <FlatList
                 data={data}
-                keyExtractor={item => item._id}
+                keyExtractor={item => String(item._id)}
                 renderItem={({ item }) => (
-                    <Card data={item} />
+                    <TouchableOpacity onPress={() => navigation.navigate("Room", { id: item._id })}>
+                        <Card data={item} />
+                    </TouchableOpacity>
                 )}
             />
         );

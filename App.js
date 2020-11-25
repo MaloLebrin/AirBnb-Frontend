@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "./screen/HomeScreen";
 import ProfileScreen from "./screen/ProfileScreen";
+import RoomScreen from "./screen/RoomScreen";
 import SignInScreen from "./screen/SignInScreen";
 import SignUpScreen from "./screen/SignUpScreen";
 import SettingsScreen from "./screen/SettingsScreen";
@@ -62,7 +63,7 @@ export default function App() {
         </Stack.Navigator>
       ) : (
           // User is signed in
-          <Stack.Navigator>
+          <Stack.Navigator initialRouteName="Room">
             <Stack.Screen
               name="Tab"
               options={{ header: () => null, animationEnabled: false }}
@@ -104,7 +105,7 @@ export default function App() {
                         <Stack.Screen
                           name="Room"
                           options={{
-                            headerBackTitleVisible: false,
+                            headerBackTitleVisible: true,
                             headerBackImage: () => (
                               <Ionicons
                                 style={{ marginLeft: 20 }}
@@ -119,7 +120,7 @@ export default function App() {
                             headerTitleAlign: "center"
                           }}
                         >
-                          {() => <Room />}
+                          {() => <RoomScreen />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
