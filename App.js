@@ -10,6 +10,8 @@ import RoomScreen from "./screen/RoomScreen";
 import SignInScreen from "./screen/SignInScreen";
 import SignUpScreen from "./screen/SignUpScreen";
 import SettingsScreen from "./screen/SettingsScreen";
+import Constants from 'expo-constants';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -63,7 +65,7 @@ export default function App() {
         </Stack.Navigator>
       ) : (
           // User is signed in
-          <Stack.Navigator initialRouteName="Room">
+          <Stack.Navigator>
             <Stack.Screen
               name="Tab"
               options={{ header: () => null, animationEnabled: false }}
@@ -92,11 +94,12 @@ export default function App() {
                         <Stack.Screen
                           name="Home"
                           options={{
-                            title: "List",
+                            title: "Home",
                             tabBarLabel: "Home",
-                            headerStyle: { backgroundColor: "#F1485C" },
-                            headerTitleStyle: { color: "white" },
-                            headerTitleAlign: "center"
+                            headerStyle: { backgroundColor: "#F1485C", height: 80, },
+                            headerTitleStyle: { color: "white", marginTop: 30 },
+                            headerTitleAlign: "center",
+
                           }}
                         >
                           {() => <HomeScreen />}
@@ -105,18 +108,18 @@ export default function App() {
                         <Stack.Screen
                           name="Room"
                           options={{
-                            headerBackTitleVisible: true,
+                            headerBackTitleVisible: false,
                             headerBackImage: () => (
                               <Ionicons
-                                style={{ marginLeft: 20 }}
+                                style={{ marginLeft: 20, marginTop: 30 }}
                                 name={"ios-arrow-back"}
                                 size={30}
                                 color={"white"}
                               />
                             ),
                             title: "Room",
-                            headerStyle: { backgroundColor: "#F1485C" },
-                            headerTitleStyle: { color: "white" },
+                            headerStyle: { backgroundColor: "#F1485C", height: 80, },
+                            headerTitleStyle: { color: "white", marginTop: 30 },
                             headerTitleAlign: "center"
                           }}
                         >

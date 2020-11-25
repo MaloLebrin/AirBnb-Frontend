@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
+import { View, Text, ActivityIndicator, StyleSheet, SafeAreaView } from "react-native";
 import { useRoute } from "@react-navigation/core";
 import axios from "axios";
 import {
@@ -34,13 +34,15 @@ const Room = ({ }) => {
                 <ActivityIndicator />
             </View>
         ) : (
-            <ScrollView>
-                <Card data={data} />
-                <TouchableWithoutFeedback style={styles.wrapper} onPress={() => setViewMore(!viewMore)}>
+            <SafeAreaView>
+                <ScrollView>
+                    <Card data={data} />
+                    <TouchableWithoutFeedback style={styles.wrapper} onPress={() => setViewMore(!viewMore)}>
 
-                    <Text numberOfLines={viewMore ? null : 4} style={styles.description}>{data.description}</Text>
-                </TouchableWithoutFeedback>
-            </ScrollView>
+                        <Text numberOfLines={viewMore ? null : 4} style={styles.description}>{data.description}</Text>
+                    </TouchableWithoutFeedback>
+                </ScrollView>
+            </SafeAreaView>
         )
 }
 const styles = StyleSheet.create({
