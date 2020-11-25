@@ -14,17 +14,22 @@ const SignInScreen = ({ setToken }) => {
   const navigation = useNavigation();
 
   const onSubmit = async () => {
-    try {
-      const response = await axios.post(
-        `https://airbnb-clone-malo.herokuapp.com/user/login`,
-        // "http://localhost:3001/user/login",
-        { email, password }
-      )
-      console.log('login', response.data);
-      setData(response.data)
-      setToken(response.data.token)
-    } catch (error) {
-      alert(error.message);
+    if (email && password) {
+
+      try {
+        const response = await axios.post(
+          `https://airbnb-clone-malo.herokuapp.com/user/login`,
+          // "http://localhost:3001/user/login",
+          { email, password }
+        )
+        console.log('login', response.data);
+        setData(response.data)
+        setToken(response.data.token)
+      } catch (error) {
+        alert(error.response.data.error);
+      }
+    } else {
+      alert('Remplir les champs')
     }
   }
 
@@ -35,6 +40,7 @@ const SignInScreen = ({ setToken }) => {
         <Text style={styles.title}>Login</Text>
         <TextInput placeholder="Email"
           placeholderTextColor="#E1E1E1"
+          keyboardType={"email-address"}
           style={styles.textInput}
           onChangeText={email => setEmail(email)}
         />

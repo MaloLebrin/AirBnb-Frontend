@@ -17,21 +17,26 @@ const SignUpScreen = ({ setToken }) => {
   const [secure, setSecure] = useState(true)
 
   const OnSubmit = async () => {
-    try {
-      if (password === password2) {
-        const response = await axios.post(
-          `https://airbnb-clone-malo.herokuapp.com/user/signup`,
-          // "http://localhost:3001/user/signup",
-          { email, username, password, description, }
-        )
-        console.log('signup', response.data);
-        setData(response.data)
-        setToken(response.data.token)
-      } else {
-        alert('both password are different')
+    if (email && password && username && description && password2) {
+      try {
+        if (password === password2) {
+          const response = await axios.post(
+            `https://airbnb-clone-malo.herokuapp.com/user/signup`,
+            // "http://localhost:3001/user/signup",
+            { email, username, password, description, }
+          )
+          console.log('signup', response.data);
+          setData(response.data)
+          setToken(response.data.token)
+        } else {
+          alert('both password are different')
+        }
+      } catch (error) {
+        alert(error.response.data.error);
       }
-    } catch (error) {
-      alert(error.message);
+
+    } else {
+      alert("Remplir tous les champs !")
     }
   }
   const navigation = useNavigation();
@@ -44,6 +49,7 @@ const SignUpScreen = ({ setToken }) => {
           <Text style={styles.title}>Sign Up</Text>
           <TextInput
             style={styles.textInput}
+            keyboardType={"email-address"}
             placeholder="Email"
             placeholderTextColor="#E1E1E1"
             onChangeText={email => setEmail(email)}

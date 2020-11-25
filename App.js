@@ -70,8 +70,11 @@ export default function App() {
               {() => (
                 <Tab.Navigator
                   tabBarOptions={{
-                    activeTintColor: "tomato",
-                    inactiveTintColor: "gray",
+                    activeTintColor: "black",
+                    inactiveTintColor: "white",
+                    style: {
+                      backgroundColor: "#F1485C"
+                    }
                   }}
                 >
                   <Tab.Screen
@@ -88,25 +91,40 @@ export default function App() {
                         <Stack.Screen
                           name="Home"
                           options={{
-                            title: "My App",
-                            headerStyle: { backgroundColor: "red" },
+                            title: "List",
+                            tabBarLabel: "Home",
+                            headerStyle: { backgroundColor: "#F1485C" },
                             headerTitleStyle: { color: "white" },
+                            headerTitleAlign: "center"
                           }}
                         >
                           {() => <HomeScreen />}
                         </Stack.Screen>
 
                         <Stack.Screen
-                          name="Profile"
+                          name="Room"
                           options={{
-                            title: "User Profile",
+                            headerBackTitleVisible: false,
+                            headerBackImage: () => (
+                              <Ionicons
+                                style={{ marginLeft: 20 }}
+                                name={"ios-arrow-back"}
+                                size={30}
+                                color={"white"}
+                              />
+                            ),
+                            title: "Room",
+                            headerStyle: { backgroundColor: "#F1485C" },
+                            headerTitleStyle: { color: "white" },
+                            headerTitleAlign: "center"
                           }}
                         >
-                          {() => <ProfileScreen />}
+                          {() => <Room />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
                   </Tab.Screen>
+
                   <Tab.Screen
                     name="Settings"
                     options={{
