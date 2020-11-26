@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/core";
-import { View, ActivityIndicator, TouchableOpacity, SafeAreaView, Dimensions } from "react-native";
+import { View, ActivityIndicator, Dimensions } from "react-native";
 import axios from "axios";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 const AroundMe = ({ dataRoom }) => {
-    const width = Dimensions.get("window").width;
-    const height = Dimensions.get("window").height;
+    // const width = Dimensions.get("window").width;
+    // const height = Dimensions.get("window").height;
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -34,7 +34,7 @@ const AroundMe = ({ dataRoom }) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `https://express-airbnb-api.herokuapp.com/rooms/around?latitude=${48.856614}&longitude=${2.3522219}`
+                    `https://express-airbnb-api.herokuapp.com/rooms/around?latitude=${latitude}&longitude=${longitude}`
                 )
                 // console.log(response.data)
                 setData(response.data)

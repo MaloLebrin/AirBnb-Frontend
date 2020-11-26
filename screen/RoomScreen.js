@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ActivityIndicator, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, ActivityIndicator, StyleSheet, SafeAreaView, Dimensions } from "react-native";
 import { useRoute } from "@react-navigation/core";
 import axios from "axios";
 import { ScrollView, TouchableWithoutFeedback } from "react-native-gesture-handler";
@@ -11,7 +11,8 @@ const Room = ({ }) => {
     const [data, setData] = useState()
     const [isLoading, setIsLoading] = useState(true)
     const [viewMore, setViewMore] = useState(false)
-
+    const width = Dimensions.get("window").width;
+    const height = Dimensions.get("window").height;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -41,26 +42,24 @@ const Room = ({ }) => {
                         <Text numberOfLines={viewMore ? null : 4} style={styles.description}>{data.description}</Text>
                     </TouchableWithoutFeedback>
                     <MapView
-                        style={{ flex: 1 }}
+                        style={{ flex: 1, width, height: height - 630 }}
                         initialRegion={{
-                            // latitude: data.location[1],
-                            // longitude: data.location[0],
-                            latitude: 48.856614,
-                            longitude: 2.3522219,
+                            latitude: data.location[1],
+                            longitude: data.location[0],
 
-                            latitudeDelta: 0.2,
-                            longitudeDelta: 0.2
+                            latitudeDelta: 0.1,
+                            longitudeDelta: 0.1
                         }}
                         showsUserLocation={true}
                     >
-                        {/* <MapView.Marker
+                        <MapView.Marker
                             coordinate={{
                                 latitude: data.location[1],
                                 longitude: data.location[0],
                             }}
                             title={data.title}
                             description={data.description}
-                        /> */}
+                        />
                     </MapView>
                     {/* <Text>emrhjroj</Text> */}
                 </ScrollView>
