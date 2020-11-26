@@ -61,7 +61,6 @@ const Room = ({ }) => {
                             description={data.description}
                         />
                     </MapView>
-                    {/* <Text>emrhjroj</Text> */}
                 </ScrollView>
             </SafeAreaView>
         )
