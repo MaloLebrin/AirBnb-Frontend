@@ -25,7 +25,7 @@ const SignUpScreen = ({ setToken }) => {
             // "http://localhost:3001/user/signup",
             { email, username, password, description, }
           )
-          console.log('signup', response.data);
+          // console.log('signup', response.data);
           setData(response.data)
           setToken(response.data.token)
         } else {

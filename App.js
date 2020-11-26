@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "./screen/HomeScreen";
-import ProfileScreen from "./screen/ProfileScreen";
+import AroundMe from "./screen/AroundMe";
 import RoomScreen from "./screen/RoomScreen";
 import SignInScreen from "./screen/SignInScreen";
 import SignUpScreen from "./screen/SignUpScreen";
@@ -130,6 +130,73 @@ export default function App() {
                         >
                           {(props) => <RoomScreen {...props} />}
                         </Stack.Screen>
+                      </Stack.Navigator>
+                    )}
+                  </Tab.Screen>
+                  <Tab.Screen
+                    name="AroundMe"
+                    options={{
+                      tabBarLabel: "Around me",
+                      tabBarIcon: ({ color, size }) => (
+                        <Ionicons
+                          name={"ios-pin"}
+                          size={size}
+                          color={color}
+                        />
+                      ),
+                    }}
+                  >
+                    {() => (
+                      <Stack.Navigator>
+                        <Stack.Screen
+                          name="AroundME"
+                          options={{
+                            headerBackTitleVisible: true,
+                            headerBackTitleStyle: { color: 'white', marginTop: 25, marginLeft: 10 },
+                            headerBackImage: () => (
+                              <Ionicons
+                                style={{ marginLeft: 20, marginTop: 30 }}
+                                name={"ios-arrow-back"}
+                                size={30}
+                                color={"white"}
+                              />
+                            ),
+                            headerStyle: { backgroundColor: "#F1485C", height: 80, },
+                            headerStyle: { backgroundColor: "#F1485C", height: 90 },
+                            headerTitleAlign: "center",
+                            headerTitle: () => {
+                              return <Logo />
+                            },
+                            headerTitleAlign: "center"
+                          }}
+                        >
+                          {(props) => <AroundMe {...props} />}
+                        </Stack.Screen>
+                        <Stack.Screen
+                          name="Room"
+                          options={{
+                            headerBackTitleVisible: true,
+                            headerBackTitleStyle: { color: 'white', marginTop: 25, marginLeft: 10 },
+                            headerBackImage: () => (
+                              <Ionicons
+                                style={{ marginLeft: 20, marginTop: 30 }}
+                                name={"ios-arrow-back"}
+                                size={30}
+                                color={"white"}
+                              />
+                            ),
+                            headerStyle: { backgroundColor: "#F1485C", height: 80, },
+                            headerStyle: { backgroundColor: "#F1485C", height: 90 },
+                            headerTitleAlign: "center",
+                            headerTitle: () => {
+                              return <Logo />
+                            },
+                            headerTitleAlign: "center"
+                          }}
+                        >
+                          {(props) => <RoomScreen {...props} />}
+                        </Stack.Screen>
+
                       </Stack.Navigator>
                     )}
                   </Tab.Screen>
