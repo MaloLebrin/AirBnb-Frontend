@@ -11,7 +11,7 @@ import SignInScreen from "./screen/SignInScreen";
 import SignUpScreen from "./screen/SignUpScreen";
 import SettingsScreen from "./screen/SettingsScreen";
 import Constants from 'expo-constants';
-
+import Logo from "./components/Logo"
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -94,21 +94,23 @@ export default function App() {
                         <Stack.Screen
                           name="Home"
                           options={{
-                            title: "Home",
                             tabBarLabel: "Home",
-                            headerStyle: { backgroundColor: "#F1485C", height: 80, },
-                            headerTitleStyle: { color: "white", marginTop: 30 },
+                            headerStyle: { backgroundColor: "#F1485C", height: 90 },
                             headerTitleAlign: "center",
+                            headerTitle: () => {
+                              return <Logo />
+                            }
 
                           }}
                         >
-                          {() => <HomeScreen />}
+                          {(props) => <HomeScreen {...props} />}
                         </Stack.Screen>
 
                         <Stack.Screen
                           name="Room"
                           options={{
-                            headerBackTitleVisible: false,
+                            headerBackTitleVisible: true,
+                            headerBackTitleStyle: { color: 'white', marginTop: 25, marginLeft: 10 },
                             headerBackImage: () => (
                               <Ionicons
                                 style={{ marginLeft: 20, marginTop: 30 }}
@@ -117,13 +119,16 @@ export default function App() {
                                 color={"white"}
                               />
                             ),
-                            title: "Room",
                             headerStyle: { backgroundColor: "#F1485C", height: 80, },
-                            headerTitleStyle: { color: "white", marginTop: 30 },
+                            headerStyle: { backgroundColor: "#F1485C", height: 90 },
+                            headerTitleAlign: "center",
+                            headerTitle: () => {
+                              return <Logo />
+                            },
                             headerTitleAlign: "center"
                           }}
                         >
-                          {() => <RoomScreen />}
+                          {(props) => <RoomScreen {...props} />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}
