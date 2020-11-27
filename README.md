@@ -1,6 +1,7 @@
 # AirBnb Front-end with React-Native
 
 React native training project produced at [Reacteur](https://www.lereacteur.io/)
+![demo](https://github.com/MaloLebrin/AirBnb-Frontend/blob/main/screenshots/demo.gif)
 
 ## Screenshots 
 
