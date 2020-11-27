@@ -21,13 +21,14 @@ const SignUpScreen = ({ setToken }) => {
       try {
         if (password === password2) {
           const response = await axios.post(
-            `https://airbnb-clone-malo.herokuapp.com/user/signup`,
+            `https://express-airbnb-api.herokuapp.com/user/sign_up`,
             // "http://localhost:3001/user/signup",
             { email, username, password, description, }
           )
           // console.log('signup', response.data);
           setData(response.data)
           setToken(response.data.token)
+          setId(response.data._id)
         } else {
           alert('both password are different')
         }

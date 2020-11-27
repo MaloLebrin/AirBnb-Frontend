@@ -3,13 +3,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
 import HomeScreen from "./screen/HomeScreen";
 import AroundMe from "./screen/AroundMe";
 import RoomScreen from "./screen/RoomScreen";
 import SignInScreen from "./screen/SignInScreen";
 import SignUpScreen from "./screen/SignUpScreen";
-import SettingsScreen from "./screen/SettingsScreen";
+import ProfileScreen from "./screen/ProfileScreen";
 import Constants from 'expo-constants';
 import Logo from "./components/Logo"
 
@@ -19,15 +19,24 @@ const Stack = createStackNavigator();
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [userToken, setUserToken] = useState(null);
-
+  const [userId, setUserId] = useState(null);
   const setToken = async (token) => {
     if (token) {
-      AsyncStorage.setItem("userToken", token);
+      await AsyncStorage.setItem("userToken", token);
     } else {
-      AsyncStorage.removeItem("userToken");
+      await AsyncStorage.removeItem("userToken");
     }
 
     setUserToken(token);
+  };
+  const setId = async id => {
+    if (id) {
+      await AsyncStorage.setItem("userId", id);
+      setUserId(id);
+    } else {
+      await AsyncStorage.removeItem("userId");
+      setUserId(null)
+    }
   };
 
   useEffect(() => {
@@ -54,13 +63,13 @@ export default function App() {
             name="SignIn"
             options={{ header: () => null, animationEnabled: false }}
           >
-            {() => <SignInScreen setToken={setToken} />}
+            {() => <SignInScreen setId={setId} setToken={setToken} />}
           </Stack.Screen>
           <Stack.Screen
             name="SignUp"
             options={{ header: () => null, animationEnabled: false }}
           >
-            {() => <SignUpScreen setToken={setToken} />}
+            {() => <SignUpScreen setId={setId} setToken={setToken} />}
           </Stack.Screen>
         </Stack.Navigator>
       ) : (
@@ -202,25 +211,39 @@ export default function App() {
                   </Tab.Screen>
 
                   <Tab.Screen
-                    name="Settings"
+                    name="Profile"
                     options={{
-                      tabBarLabel: "Settings",
+                      tabBarLabel: "Profile",
                       tabBarIcon: ({ color, size }) => (
-                        <Ionicons
-                          name={"ios-options"}
-                          size={size}
-                          color={color}
-                        />
+                        <AntDesign name="user" size={size} color={color} />
                       ),
                     }}
                   >
                     {() => (
                       <Stack.Navigator>
                         <Stack.Screen
-                          name="Settings"
-                          options={{ title: "Settings", tabBarLabel: "Settings" }}
+                          name="Profile"
+                          options={{
+                            headerBackTitleVisible: true,
+                            headerBackTitleStyle: { color: 'white', marginTop: 25, marginLeft: 10 },
+                            headerBackImage: () => (
+                              <Ionicons
+                                style={{ marginLeft: 20, marginTop: 30 }}
+                                name={"ios-arrow-back"}
+                                size={30}
+                                color={"white"}
+                              />
+                            ),
+                            headerStyle: { backgroundColor: "#F1485C", height: 80, },
+                            headerStyle: { backgroundColor: "#F1485C", height: 90 },
+                            headerTitleAlign: "center",
+                            headerTitle: () => {
+                              return <Logo />
+                            },
+                            headerTitleAlign: "center"
+                          }}
                         >
-                          {() => <SettingsScreen setToken={setToken} />}
+                          {(props) => <ProfileScreen {...props} setId={setId} setToken={setToken} />}
                         </Stack.Screen>
                       </Stack.Navigator>
                     )}

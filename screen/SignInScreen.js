@@ -6,7 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import axios from "axios";
 
-const SignInScreen = ({ setToken }) => {
+const SignInScreen = ({ setToken, setId }) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [data, setData] = useState()
@@ -18,13 +18,14 @@ const SignInScreen = ({ setToken }) => {
 
       try {
         const response = await axios.post(
-          `https://airbnb-clone-malo.herokuapp.com/user/login`,
+          `https://express-airbnb-api.herokuapp.com/user/log_in`,
           // "http://localhost:3001/user/login",
           { email, password }
         )
         console.log('login', response.data);
         setData(response.data)
         setToken(response.data.token)
+        setId(response.data.id)
       } catch (error) {
         alert(error.response.data.error);
       }
